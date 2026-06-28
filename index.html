@@ -245,27 +245,16 @@
 
 <!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
-  <div class="modal">
+  <div class="modal" style="text-align:center">
+    <div style="font-size:48px;margin-bottom:16px">📈</div>
     <h2>Welcome to <span style="color:var(--accent)">TradersVic</span></h2>
-    <p>Connect your Deriv account to start trading instantly.</p>
-
-    <!-- OAuth Login Button -->
-    <button class="modal-btn" onclick="loginWithDeriv()" style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px">
-      <img src="https://deriv.com/static/images/favicons/favicon.png" style="width:20px;height:20px;border-radius:4px" onerror="this.style.display='none'"/>
-      🔐 Login with Deriv Account
-    </button>
-
-    <div style="display:flex;align-items:center;gap:10px;margin:14px 0">
-      <div style="flex:1;height:1px;background:var(--border)"></div>
-      <span style="font-size:11px;color:var(--muted)">OR</span>
-      <div style="flex:1;height:1px;background:var(--border)"></div>
-    </div>
-
-    <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Enter API token manually</p>
-    <input type="password" id="tokenInput" placeholder="Paste your Deriv API token here..." />
-    <div id="tokenStatus" style="font-size:12px;color:var(--muted);margin-bottom:12px;min-height:16px;"></div>
-    <button class="modal-btn" onclick="connectAccount()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text)">Connect with Token</button>
-    <button class="modal-skip" onclick="useDemo()">Use Demo Account</button>
+    <p style="margin-bottom:8px">Powered by Deriv. Professional trading tools for everyone.</p>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:28px">Connect your Deriv account to access live markets, bots, and automated trading.</div>
+    <a id="derivLoginBtn" href="https://oauth.deriv.com/oauth2/authorize?app_id=33FQQRm1hErSgqqT2j7My&l=en&brand=deriv&redirect_uri=https%3A%2F%2Fkatuwriting.github.io%2Ftradersvic%2F" style="display:flex;align-items:center;justify-content:center;gap:12px;font-size:15px;padding:15px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:10px;text-decoration:none;font-weight:700;margin-bottom:10px">
+      <span style="font-size:20px">🔐</span> Login with Deriv Account
+    </a>
+    <div style="margin-top:4px;font-size:11px;color:var(--muted)">You'll be redirected to Deriv's secure login page</div>
+    <button class="modal-skip" onclick="useDemo()" style="margin-top:20px">Try Demo Account</button>
   </div>
 </div>
 
@@ -1127,9 +1116,8 @@ function showLogin() { document.getElementById('loginModal').style.display='flex
 // ── OAUTH LOGIN ──
 function loginWithDeriv() {
   const appId = '33FQQRm1hErSgqqT2j7My';
-  const redirectUrl = encodeURIComponent(window.location.href.split('?')[0]);
-  const oauthUrl = `https://oauth.deriv.com/oauth2/authorize?app_id=${appId}&l=en&brand=deriv&redirect_uri=${redirectUrl}`;
-  window.location.href = oauthUrl;
+  const redirectUrl = 'https://katuwriting.github.io/tradersvic/';
+  window.location.href = `https://oauth.deriv.com/oauth2/authorize?app_id=${appId}&l=en&brand=deriv&redirect_uri=${encodeURIComponent(redirectUrl)}`;
 }
 
 // Check if redirected back from Deriv OAuth with token in URL
