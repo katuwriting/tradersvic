@@ -1125,18 +1125,17 @@ function checkOAuthToken() {
   const params = new URLSearchParams(window.location.search);
   const token1 = params.get('token1');
   const acct1 = params.get('acct1');
+  const cur1 = params.get('cur1');
   if(token1) {
-    // Clean URL
     window.history.replaceState({}, document.title, window.location.pathname);
-    document.getElementById('tokenStatus').textContent = '🔄 Connecting via OAuth...';
+    document.getElementById('loginModal').style.display = 'none';
     token = token1;
+    showToast('🔄 Connecting your Deriv account...', 'success');
     connectWS(token1);
-    showToast('Logging you in via Deriv OAuth...', 'success');
   }
 }
 
-
-  const t = document.getElementById('tokenInput').value.trim();
+function connectAccount() {
   if(!t) { document.getElementById('tokenStatus').textContent='⚠️ Please enter your API token.'; return; }
   document.getElementById('tokenStatus').textContent='🔄 Connecting to Deriv...';
   document.getElementById('tokenStatus').style.color='var(--yellow)';
